@@ -1,11 +1,11 @@
 import {Project} from "@/models/project";
-import {NextResponse} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import noisetoolImage from '@/../public/noisetool.png';
-import {StaticImageData} from 'next/image';
 
-const baseUrl = 'http://localhost:3001';
+export async function GET(request: NextRequest) {
+  const {protocol, host} = new URL(request.url);
+  const baseUrl = `${protocol}//${host}`;
 
-export async function GET() {
   const projects = [
     {
       name: 'noisetool.',
@@ -13,8 +13,6 @@ export async function GET() {
       githubLink: 'https://github.com/stuchlyf/noisetool..git',
       link: 'https://noisetool.stuchlyf.dev',
       image: `${baseUrl}${noisetoolImage.src}`,
-      // image: noisetoolImage
-      // image: ''
     }
   ] satisfies Project[];
 
